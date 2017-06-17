@@ -21,16 +21,46 @@ class OmnitureVerificationUITests: XCTestCase {
         XCUIApplication().launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        
+        OmnitureRoute.init(xctestcase: self).signOut_resetEnvironment_deleteContentFromUser()
+        HomeRoute.init(xctestcase: self).homeVerification()
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        OmnitureRoute.init(xctestcase: self).signOut_resetEnvironment_deleteContentFromUser()
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func test_goToMyMeds_via_HomeMyMeds_usingLogin() {
+        let mr = HomeMyMedsRoute.init(xctestcase: self)
+        mr.tapMyMeds()
+        mr.tapCancel(pagename: "home-screen")
+        mr.tapMyMeds()
+        mr.tapSignIn()
+        
+        let sir = SignInRoute.init(xctestcase: self)
+        sir.signIn()
+        mr.verifyMyMeds(module: "login-success", mlink: "")
+        
+        mr.returnHome()
+        mr.tapMyMeds()
+        mr.verifyMyMeds(module: "mymeds", mlink: "")
+    }
+    
+    func test_goToMyMeds_via_SettingsMyMeds_usingLogin() {
+        let mr = MyMedsRoute.init(xctestcase: self)
+        mr.tapMyMeds()
+        mr.tapCancel(pagename: "settings")
+        mr.tapMyMeds()
+        mr.tapSignIn()
+        
+        let sir = SignInRoute.init(xctestcase: self)
+        sir.signIn()
+        mr.verifyMyMeds(module: "login-success", mlink: "")
+        
+        mr.returnHome()
+        
+        mr.tapMyMeds()
     }
     
 }

@@ -14,6 +14,7 @@
 		7FF3862D1EF4F90E000FC278 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FF3862B1EF4F90E000FC278 /* LaunchScreen.storyboard */; };
 		7FF386381EF4F90E000FC278 /* OmnitureVerificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF386371EF4F90E000FC278 /* OmnitureVerificationTests.swift */; };
 		7FF386431EF4F90E000FC278 /* OmnitureVerificationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF386421EF4F90E000FC278 /* OmnitureVerificationUITests.swift */; };
+		7FF386531EF4F96F000FC278 /* OmnitureRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF386521EF4F96F000FC278 /* OmnitureRoute.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		7FF3863E1EF4F90E000FC278 /* OmnitureVerificationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OmnitureVerificationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FF386421EF4F90E000FC278 /* OmnitureVerificationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmnitureVerificationUITests.swift; sourceTree = "<group>"; };
 		7FF386441EF4F90E000FC278 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FF386521EF4F96F000FC278 /* OmnitureRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmnitureRoute.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,9 +122,26 @@
 			isa = PBXGroup;
 			children = (
 				7FF386421EF4F90E000FC278 /* OmnitureVerificationUITests.swift */,
+				7FF386511EF4F932000FC278 /* OmnitureTestCases */,
+				7FF386501EF4F918000FC278 /* OmnitureRoutes */,
 				7FF386441EF4F90E000FC278 /* Info.plist */,
 			);
 			path = OmnitureVerificationUITests;
+			sourceTree = "<group>";
+		};
+		7FF386501EF4F918000FC278 /* OmnitureRoutes */ = {
+			isa = PBXGroup;
+			children = (
+				7FF386521EF4F96F000FC278 /* OmnitureRoute.swift */,
+			);
+			name = OmnitureRoutes;
+			sourceTree = "<group>";
+		};
+		7FF386511EF4F932000FC278 /* OmnitureTestCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = OmnitureTestCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FF386531EF4F96F000FC278 /* OmnitureRoute.swift in Sources */,
 				7FF386431EF4F90E000FC278 /* OmnitureVerificationUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
