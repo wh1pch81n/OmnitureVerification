@@ -22,45 +22,55 @@ class OmnitureVerificationUITests: XCTestCase {
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
         
-        OmnitureRoute.init(xctestcase: self).signOut_resetEnvironment_deleteContentFromUser()
-        HomeRoute.init(xctestcase: self).homeVerification()
+        OmnitureState.init(xctestcase: self).signOut_resetEnvironment_deleteContentFromUser()
     }
     
     override func tearDown() {
-        OmnitureRoute.init(xctestcase: self).signOut_resetEnvironment_deleteContentFromUser()
+        _ = HomeState.init(xctestcase: self) //<-- end at home
+        OmnitureState.init(xctestcase: self).signOut_resetEnvironment_deleteContentFromUser()
         super.tearDown()
     }
     
     func test_goToMyMeds_via_HomeMyMeds_usingLogin() {
-        let mr = HomeMyMedsRoute.init(xctestcase: self)
-        mr.tapMyMeds()
-        mr.tapCancel(pagename: "home-screen")
-        mr.tapMyMeds()
-        mr.tapSignIn()
+        let hs = HomeState(xctestcase: self)
+        hs.tapMyMeds()
+        let lp = LoginPopUpState(xctestcase: self)
+        lp.tapCancel()
+        hs.tapMyMeds()
+        lp.tapSignIn()
         
-        let sir = SignInRoute.init(xctestcase: self)
-        sir.signIn()
-        mr.verifyMyMeds(module: "login-success", mlink: "")
+        LoginScreenState(xctestcase: self, mmodule: "mymeds", mlink: "sgnin")
+            .tapSignIn()
+        MyMedsState(xctestcase: self, mmodule: "login-success", mlink: "")
+            .goBackToHome()
         
-        mr.returnHome()
-        mr.tapMyMeds()
-        mr.verifyMyMeds(module: "mymeds", mlink: "")
+        hs.tapMyMeds()
+        MyMedsState(xctestcase: self, mmodule: "mymeds", mlink: "")
+            .goBackToHome()
     }
-    
+
     func test_goToMyMeds_via_SettingsMyMeds_usingLogin() {
-        let mr = MyMedsRoute.init(xctestcase: self)
-        mr.tapMyMeds()
-        mr.tapCancel(pagename: "settings")
-        mr.tapMyMeds()
-        mr.tapSignIn()
+        HomeState(xctestcase: self) //<- begin at home
+            .openSettings()
+        let ss = SettingsState(xctestcase: self)
+        ss.tapMyMeds()
         
-        let sir = SignInRoute.init(xctestcase: self)
-        sir.signIn()
-        mr.verifyMyMeds(module: "login-success", mlink: "")
+        LoginPopUpState(xctestcase: self)
+            .tapCancel()
+        ss.tapMyMeds()
+        LoginPopUpState(xctestcase: self)
+            .tapSignIn()
         
-        mr.returnHome()
-        
-        mr.tapMyMeds()
+        LoginScreenState(xctestcase: self, mmodule: "mymeds", mlink: "sgnin")
+            .tapSignIn()
+        MyMedsState(xctestcase: self, mmodule: "login-success", mlink: "")
+            .goBackToHome()
+        HomeState(xctestcase: self)
+            .openSettings()
+        SettingsState(xctestcase: self)
+            .tapMyMeds()
+        MyMedsState(xctestcase: self, mmodule: "mymeds", mlink: "")
+            .goBackToHome()
     }
     
 }
